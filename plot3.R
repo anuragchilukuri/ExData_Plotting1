@@ -4,6 +4,9 @@ c4q1<-read.table("household_power_consumption.txt",sep=";",header=TRUE,colClasse
 c4q1$Date<-as.Date(c4q1$Date,format="%d/%m/%Y")
 c4q1m<-c4q1[c4q1$Date %in% as.Date(c('2007-02-01','2007-02-02')),]
 c4q1m$Datetime<-as.POSIXct(paste(c4q1m$Date,c4q1m$Time),format="%Y-%m-%d %H:%M:%S")
-png(filename="plot1.png",width=480,height=480)
-hist(c4q1m$Global_active_power,col="red",xlab="Global Activ Power (kilowatts)",main="Global Active Power")
+png(filename="plot3.png",width=480,height=480)
+plot(c4q1m$Datetime,c4q1m$Sub_metering_1,type="l",ylab="Energy sub metering",xlab="",main="")
+lines(c4q1m$Datetime,c4q1m$Sub_metering_2,col="red")
+lines(c4q1m$Datetime,c4q1m$Sub_metering_3,col="blue")
+legend("topright",c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),lwd=c(2,2,2),col=c("black","red","blue"))
 dev.off()
